@@ -1,57 +1,53 @@
-# ThreadMart - Clothing Marketplace PRD
+# Threaded - Clothing Marketplace PRD (MESA Hackathon)
 
 ## Original Problem Statement
-24-hour hackathon project: Build a clothing marketplace website that aggregates products from various stores using Google Shopping search.
+24-hour hackathon project (MESA): Build a clothing marketplace website.
 
 ## Architecture
-- **Frontend**: React 19 with Tailwind CSS, shadcn/ui components
-- **Backend**: FastAPI with MongoDB
-- **Search**: Google Shopping via SerpAPI integration
+- **Frontend**: React 19 + Tailwind CSS + shadcn/ui
+- **Backend**: FastAPI + MongoDB
+- **Search**: Google Shopping via SerpAPI
+- **AI Try-On**: Gemini Nano Banana (gemini-3.1-flash-image-preview)
+- **Crypto Price**: CoinGecko API (free)
 
-## User Personas
-1. **Shoppers** - Looking for clothing deals across multiple stores
-2. **Comparison shoppers** - Want to compare prices from different retailers
+## Core Features (Implemented)
+1. **Rebranding** - "Threaded" name + MESA logo in header
+2. **Marketplace Categories** - All, Men, Women, Streetwear, Vintage, Luxury, Athletic, Accessories
+3. **Style Inspo Feed** - 8 curated aesthetic tiles (Y2K Revival, Clean Minimalist, Gorpcore, Dark Academia, etc.)
+4. **Solana Integration** (visual) - SOL price badges on products, "Pay SOL" button with mock checkout
+5. **AI Virtual Try-On** - Upload photo + select product → Gemini generates try-on image
 
-## Core Requirements (Static)
-- [x] Search functionality for clothing products
-- [x] Product grid display with images, prices, store names
-- [x] Product detail modal with "Go to Website" button
-- [x] Dark theme UI
-- [x] Trending searches for discovery
+## Configuration
+- `SERPAPI_KEY` - SerpAPI for Google Shopping
+- `EMERGENT_LLM_KEY` - Gemini image generation
+- `MONGO_URL`, `DB_NAME` - MongoDB
+
+## API Endpoints
+- `GET /api/search?q=...&category=...` - Product search
+- `GET /api/trending` - Trending search terms
+- `GET /api/categories` - Marketplace categories
+- `GET /api/inspo` - Style inspo feed
+- `GET /api/product-link?token=...` - Direct store link
+- `GET /api/sol-price` - Current SOL/USD price
+- `POST /api/try-on` - AI virtual try-on
 
 ## What's Been Implemented
 **Jan 2026 - MVP**
-- Complete frontend with ThreadMart branding
-- Search bar with trending tags
-- Product card grid with hover effects
-- Product detail modal with ratings, delivery info, CTA button
-- Backend API with Google Shopping integration via SerpAPI
-- Search history stored in MongoDB
-- Error handling for missing API key
+- Google Shopping search with clothing-only filter
+- Product grid with cards showing price + SOL conversion
+- Product detail modal with AI Try-On + Shop + Pay SOL buttons
+- Landing page with categories, trending tags, inspo grid
+- MESA branding throughout
+- Direct store links (not Google redirects)
+- Real-time SOL price from CoinGecko
 
-## Configuration Required
-- `SERPAPI_KEY` in `/app/backend/.env` - User has key, needs to add it
+## Backlog (Post-Hackathon)
+**P1:**
+- Real Solana wallet integration (Phantom adapter)
+- Pinterest API integration for inspo feed
+- User accounts + saved looks/wishlist
 
-## Prioritized Backlog
-**P0 (Critical)**
-- [ ] User adds their SerpAPI key to enable search
-
-**P1 (Important)**
-- [ ] Add filters (price range, store, rating)
-- [ ] Wishlist/favorites functionality
-- [ ] Recent searches display
-
-**P2 (Nice to have)**
-- [ ] User accounts
-- [ ] Price alerts
-- [ ] Share functionality
-
-## Tech Stack
-- React 19, Tailwind CSS 3.4, shadcn/ui
-- FastAPI, Motor (MongoDB async driver)
-- SerpAPI for Google Shopping
-
-## Next Tasks
-1. Add SerpAPI key and test search
-2. Consider adding price filters
-3. Add wishlist feature for hackathon demo
+**P2:**
+- Real try-on with multi-angle views
+- Social sharing of try-on images
+- Price drop alerts
