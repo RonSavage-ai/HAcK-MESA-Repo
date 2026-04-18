@@ -267,6 +267,10 @@ async def virtual_try_on(request: TryOnRequest):
 
 # Include router
 app.include_router(api_router)
+
+# Include separate Try-On Studio module
+from tryon_studio.router import router as tryon_studio_router
+app.include_router(tryon_studio_router)
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,

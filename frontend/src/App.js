@@ -17,6 +17,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import TryOnStudio from "@/tryon_studio/TryOnStudio";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -401,6 +402,7 @@ function App() {
   const [hasSearched, setHasSearched] = useState(false);
   const [error, setError] = useState(null);
   const [solPrice, setSolPrice] = useState(null);
+  const [studioOpen, setStudioOpen] = useState(false);
 
   useEffect(() => {
     const fetchInitial = async () => {
@@ -495,7 +497,15 @@ function App() {
                 <span className="text-zinc-400">${solPrice.toFixed(2)}</span>
               </div>
             )}
-            <div className="flex items-center gap-2 text-xs text-zinc-500">
+            <Button
+              data-testid="open-studio-btn"
+              onClick={() => setStudioOpen(true)}
+              className="bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-500 hover:to-fuchsia-500 rounded-full px-4 h-9 text-sm font-semibold"
+            >
+              <Wand2 className="w-4 h-4 mr-1.5" />
+              Try-On Studio
+            </Button>
+            <div className="hidden md:flex items-center gap-2 text-xs text-zinc-500">
               <span>powered by</span>
               <img src={MESA_LOGO} alt="MESA" className="h-6 w-auto object-contain" />
             </div>
@@ -728,6 +738,11 @@ function App() {
         product={tryOnProduct}
         isOpen={tryOnOpen}
         onClose={() => setTryOnOpen(false)}
+      />
+
+      <TryOnStudio
+        isOpen={studioOpen}
+        onClose={() => setStudioOpen(false)}
       />
 
       <footer className="border-t border-zinc-900 py-8">
